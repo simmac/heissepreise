@@ -68,7 +68,7 @@ exports.generateCategories = async function () {
     const categories = [];
     let baseIndex = 0;
     for (const baseSlug of baseCategorySlugs) {
-        const data = await axios.get(`https://shop.billa.at/api/categories/${baseSlug}/child-properties?storeId=00-10`);
+        const data = await axios.get(`https://shop.billa.at/api/product-discovery/categories/${baseSlug}/child-properties?storeId=00-10`);
         data.data.forEach((value, index) => {
             const code = subCategoryMap[value.slug] ?? baseIndex.toString(16).toUpperCase() + index.toString(16).toUpperCase();
             categories.push({
@@ -89,7 +89,7 @@ exports.fetchData = async function () {
     for (const category of categories) {
         let page = 0;
         while (true) {
-            const data = await axios.get(`https://shop.billa.at/api/categories/${category.id}/products?pageSize=500&storeId=00-10&page=${page}`);
+            const data = await axios.get(`https://shop.billa.at/api/product-discovery/categories/${category.id}/products?pageSize=500&storeId=00-10&page=${page}`);
             page++;
             if (data.data.count == 0) break;
             for (const rawItem of data.data.results) {
