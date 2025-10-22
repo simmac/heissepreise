@@ -35,6 +35,9 @@ exports.getCanonical = function (item, today) {
 };
 
 exports.fetchData = async function () {
+    // Penny API is no longer available - disabled since 14.10.2025
+    return [];
+    /*
     hits = 100;
     page = 0;
     done = false;
@@ -47,6 +50,7 @@ exports.fetchData = async function () {
         result = result.concat(data.results);
     }
     return result;
+    */
 };
 
 async function parseCategory(url, parent, result, lookup) {

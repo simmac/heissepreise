@@ -45,7 +45,19 @@ const subCategoryMap = {
 };
 
 exports.getCanonical = function (item, today) {
+    // Skip items without price (e.g., out of stock items)
+    if (!item.price || !item.price.regular || !item.price.regular.value) {
+        return null;
+    }
+
     const price = item.price.regular.value / 100;
+
+    // Handle empty unit string - fallback to baseUnitShort or "stk"
+    let unit = item.volumeLabelShort;
+    if (!unit || unit === "") {
+        unit = item.price.baseUnitShort || "stk";
+    }
+
     return utils.convertUnit(
         {
             id: item.sku,
@@ -54,7 +66,7 @@ exports.getCanonical = function (item, today) {
             price,
             priceHistory: [{ date: today, price }],
             isWeighted: item.weightArticle,
-            unit: item.volumeLabelShort ?? item.price.baseUnitShort,
+            unit: unit,
             quantity: parseFloat(item.amount),
             bio: item.badges && item.badges.includes("pp-bio") ? true : false,
             url: item.slug,
@@ -89,7 +101,9 @@ exports.fetchData = async function () {
     for (const category of categories) {
         let page = 0;
         while (true) {
-            const data = await axios.get(`https://shop.billa.at/api/product-discovery/categories/${category.id}/products?pageSize=500&storeId=00-10&page=${page}`);
+            const data = await axios.get(
+                `https://shop.billa.at/api/product-discovery/categories/${category.id}/products?pageSize=500&storeId=00-10&page=${page}`
+            );
             page++;
             if (data.data.count == 0) break;
             for (const rawItem of data.data.results) {
@@ -158,6 +172,7 @@ async function main() {
     const canonicalItems = [];
     for (const newItem of newItems) {
         const canonicalItem = exports.getCanonical(newItem, currentDate());
+        if (!canonicalItem) continue;
         canonicalItems.push(canonicalItem);
         const oldItem = oldItemsLookup[newItem.sku];
         if (!oldItem) continue;

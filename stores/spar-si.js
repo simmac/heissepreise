@@ -18,7 +18,13 @@ exports.getCanonical = function (item, today) {
         price = item.masterValues.price;
     }
 
-    const s = item.masterValues.title.replace(" EINWEG", "").replace(" MEHRWEG", "").replace("per kg", "1 kg").trim().replace(".", "");
+    // Some items have 'name' instead of 'title'
+    const title = item.masterValues.title || item.masterValues.name;
+    if (!title) {
+        return null; // Skip items without title or name
+    }
+
+    const s = title.replace(" EINWEG", "").replace(" MEHRWEG", "").replace("per kg", "1 kg").trim().replace(".", "");
     let tokens = s.split(" ");
     const lastToken = tokens[tokens.length - 1];
     const match = /(\d+)\/(\d+)/.exec(lastToken);
@@ -53,8 +59,8 @@ exports.getCanonical = function (item, today) {
         quantity = fallback.quantity;
     }
 
-    let name = item.masterValues.title;
-    tokens = item.masterValues.title.split(",");
+    let name = title;
+    tokens = title.split(",");
     if (tokens.length >= 3) {
         name = tokens[1] + " " + tokens[0] + " " + tokens.slice(2).join(" ");
     }

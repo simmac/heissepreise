@@ -246,12 +246,6 @@
     "code": null
   },
   {
-    "id": "F1-1-11",
-    "description": "Spargel",
-    "url": "https://www.interspar.at/shop/lebensmittel/c/F1-1-11",
-    "code": null
-  },
-  {
     "id": "F1-2",
     "description": "Frischobst",
     "url": "https://www.interspar.at/shop/lebensmittel/c/F1-2",
@@ -1302,6 +1296,12 @@
     "code": null
   },
   {
+    "id": "F6-4-3",
+    "description": "Zöpfe",
+    "url": "https://www.interspar.at/shop/lebensmittel/c/F6-4-3",
+    "code": null
+  },
+  {
     "id": "F6-4-4",
     "description": "Kuchen & Torten",
     "url": "https://www.interspar.at/shop/lebensmittel/c/F6-4-4",
@@ -1533,6 +1533,12 @@
     "id": "F7-6-1",
     "description": "Lager/Märzen",
     "url": "https://www.interspar.at/shop/lebensmittel/c/F7-6-1",
+    "code": null
+  },
+  {
+    "id": "F7-6-2",
+    "description": "Schankbier",
+    "url": "https://www.interspar.at/shop/lebensmittel/c/F7-6-2",
     "code": null
   },
   {
@@ -2970,6 +2976,12 @@
     "code": null
   },
   {
+    "id": "F1-1-11",
+    "description": "Spargel",
+    "url": "https://www.interspar.at/shop/lebensmittel/c/F1-1-11",
+    "code": null
+  },
+  {
     "id": "F1-5",
     "description": "Obst- & Gemüsekisten",
     "url": "https://www.interspar.at/shop/lebensmittel/c/F1-5",
@@ -3009,18 +3021,6 @@
     "id": "F6-4-1",
     "description": "Croissant & Plundergebäck",
     "url": "https://www.interspar.at/shop/lebensmittel/c/F6-4-1",
-    "code": null
-  },
-  {
-    "id": "F6-4-3",
-    "description": "Zöpfe",
-    "url": "https://www.interspar.at/shop/lebensmittel/c/F6-4-3",
-    "code": null
-  },
-  {
-    "id": "F7-6-2",
-    "description": "Schankbier",
-    "url": "https://www.interspar.at/shop/lebensmittel/c/F7-6-2",
     "code": null
   },
   {
