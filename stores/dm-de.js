@@ -11,6 +11,11 @@ const units = {
 };
 
 exports.getCanonical = function (item, today) {
+    // Skip items without price
+    if (!item.price || !item.price.value) {
+        return null;
+    }
+
     let quantity = item.netQuantityContent || item.basePriceQuantity;
     let unit = item.contentUnit || item.basePriceUnit;
     return utils.convertUnit(
