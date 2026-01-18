@@ -16,15 +16,22 @@ const units = {
 
 const baseCategorySlugs = [
     "obst-und-gemuese-13751",
-    "brot-und-gebaeck-13766",
+    "brot-und-gebaeck-15520",
     "getraenke-13784",
-    "kuehlwaren-13841",
-    "tiefkuehl-13916",
-    "nahrungsmittel-13943",
-    "suesses-und-salziges-14057",
-    "pflege-14083",
-    "haushalt-14126",
-    "haustier-14181",
+    "kuehlwaren-15416",
+    "tiefkuehl-15415",
+    "vorratsschrank-15012",
+    "suesses-und-salziges-15159",
+    "drogerie-und-kosmetik-15274",
+    "kueche-haushalt-und-garten-15320",
+    "haustier-15672",
+    "wurst-schinken-und-speck-15572",
+    "baby-und-kleinkind-15671",
+    "fisch-und-meeresfruechte-15573",
+    "schnelle-kueche-15389",
+    "neu-im-online-shop-14506",
+    "fleisch-15571",
+    "fleisch-wurst-und-fisch-ersatz-15215",
 ];
 
 // Map from old categories (see categories.js) to new categories in new Billa Store
