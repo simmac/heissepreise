@@ -19,7 +19,7 @@ exports.stores = {
         name: "Hofer",
         budgetBrands: ["milfina"],
         color: "purple",
-        defaultChecked: true,
+        defaultChecked: false,
         getUrl: (item) => `https://www.roksh.at/hofer/produkte/${item.url}`,
     },
     lidl: {
@@ -41,7 +41,7 @@ exports.stores = {
         name: "DM",
         budgetBrands: ["balea"],
         color: "orange",
-        defaultChecked: true,
+        defaultChecked: false,
         getUrl: (item) => `https://www.dm.at/product-p${item.id}.html`,
     },
     mueller: {
@@ -62,7 +62,7 @@ exports.stores = {
         name: "Penny",
         budgetBrands: ["bravo", "echt bio!", "san fabio", "federike", "blik", "berida", "today", "ich bin österreich"],
         color: "purple",
-        defaultChecked: true,
+        defaultChecked: false,
         getUrl: (item) => `https://www.penny.at/produkte/${item.url}`,
         removeOld: true,
     },
