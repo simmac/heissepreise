@@ -79,6 +79,7 @@ class ItemsFilter extends View {
                     abbr="${BUDGET_BRANDS.map((budgetBrand) => budgetBrand.toUpperCase()).join(", ")}"
                 ></custom-checkbox>
                 <custom-checkbox x-id="bio" x-state x-change label="${__("ItemsFilter_Nur Bio")}"></custom-checkbox>
+                <custom-checkbox x-id="available" x-state x-change label="${__("ItemsFilter_Nur Verfügbar")}" checked></custom-checkbox>
                 <custom-checkbox x-id="exact" x-state x-change label="${__("ItemsFilter_Exaktes Wort")}"></custom-checkbox>
                 <label class="cursor-pointer inline-flex items-center gap-x-1 rounded-full bg-white border border-gray-400 px-2 py-1 text-xs font-medium text-gray-600">
                 ${__("ItemsFilter_Preis €")} <input x-id="minPrice" x-state x-input class="w-12" type="number" min="0" value="0">
@@ -270,11 +271,13 @@ class ItemsFilter extends View {
             if (this._filterByMisc) {
                 const budgetBrands = elements.budgetBrands.checked;
                 const bio = elements.bio.checked;
+                const available = elements.available.checked;
                 const minPrice = parseNumber(elements.minPrice.value, 0);
                 const maxPrice = parseNumber(elements.maxPrice.value, 100);
                 filteredItems = filteredItems.filter((item) => {
                     if (budgetBrands && !BUDGET_BRANDS.some((budgetBrand) => item.name.toLowerCase().indexOf(budgetBrand) >= 0)) return false;
                     if (bio && !item.bio) return false;
+                    if (available && item.unavailable) return false;
                     if (minPrice > item.price) return false;
                     if (maxPrice < item.price) return false;
                     return true;
