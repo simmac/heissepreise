@@ -158,13 +158,17 @@ exports.toCategoryCode = (i, j) => {
 };
 
 exports.fromCategoryCode = (code) => {
-    if (!code || code.length != 2) return [exports.categories.length - 1, 0];
+    if (!code || code.length < 2) return [exports.categories.length - 1, 0];
     const codeI = code.charCodeAt(0);
     const codeJ = code.charCodeAt(1);
-    return [
-        codeI - (codeI < "A".charCodeAt(0) ? "0".charCodeAt(0) : "A".charCodeAt(0) - 10),
-        codeJ - (codeJ < "A".charCodeAt(0) ? "0".charCodeAt(0) : "A".charCodeAt(0) - 10),
-    ];
+    let i = codeI - (codeI < "A".charCodeAt(0) ? "0".charCodeAt(0) : "A".charCodeAt(0) - 10);
+    let j = codeJ - (codeJ < "A".charCodeAt(0) ? "0".charCodeAt(0) : "A".charCodeAt(0) - 10);
+    // Clamp to valid range, fall back to "Unbekannt" if out of bounds
+    if (i < 0 || i >= exports.categories.length) {
+        i = exports.categories.length - 1;
+        j = 0;
+    }
+    return [i, j];
 };
 
 exports.isValidCode = (code) => {
