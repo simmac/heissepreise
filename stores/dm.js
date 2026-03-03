@@ -13,7 +13,7 @@ const units = {
 
 exports.getCanonical = function (item, today) {
     // Skip items without price
-    if (!item.price || !item.price.value) {
+    if (!item.tileData?.trackingData?.price) {
         return null;
     }
 
@@ -24,8 +24,8 @@ exports.getCanonical = function (item, today) {
             id: "" + item.gtin,
             name: `${item.brandName} ${item.title}`,
             // description: "", not available
-            price: item.price.value,
-            priceHistory: [{ date: today, price: item.price.value }],
+            price: item.tileData.trackingData.price,
+            priceHistory: [{ date: today, price: item.tileData.trackingData.price }],
             unit,
             quantity,
             ...((item.brandName === "dmBio" || (item.name && /^Bio[ -]/.test(item.name))) && { bio: true }),
@@ -43,8 +43,8 @@ exports.fetchData = async function () {
         "allCategories.id=010000&price.value.from=3&price.value.to=4", //~500 items
         "allCategories.id=010000&price.value.from=4&price.value.to=7", //~800 items
         "allCategories.id=010000&price.value.from=7&price.value.to=10", //~900 items
-        "allCategories.id=010000&price.value.from=10&price.value.to=15", //~900 items
-        "allCategories.id=010000&price.value.from=15", //~300 items
+        "allCategories.id=010000&price.value.from=10&price.value.to=14", //~800 items
+        "allCategories.id=010000&price.value.from=14", //~500 items
         "allCategories.id=020000&price.value.to=2", //~600 items
         "allCategories.id=020000&price.value.from=2&price.value.to=3", //~550 items
         "allCategories.id=020000&price.value.from=3&price.value.to=4", //~600 items
@@ -53,8 +53,8 @@ exports.fetchData = async function () {
         "allCategories.id=020000&price.value.from=10&price.value.to=18", //~930 items
         "allCategories.id=020000&price.value.from=18&price.value.to=70", //~940 items
         "allCategories.id=020000&price.value.from=70", //~60 items
-        "allCategories.id=030000&price.value.to=8", //~900 items
-        "allCategories.id=030000&price.value.from=8", //~500 items
+        "allCategories.id=030000&price.value.to=7", //~850 items
+        "allCategories.id=030000&price.value.from=7", //~650 items
         "allCategories.id=040000&price.value.to=2", //~600 items
         "allCategories.id=040000&price.value.from=2&price.value.to=4", //~900 items
         "allCategories.id=040000&price.value.from=4", //~400 items
@@ -92,7 +92,7 @@ exports.fetchData = async function () {
             );
         }
         dmItems = dmItems.concat(items.products);
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 2000));
     }
     return dmItems;
 };
