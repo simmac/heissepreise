@@ -17,8 +17,20 @@ exports.getCanonical = function (item, today) {
         return null;
     }
 
-    let quantity = item.netQuantityContent || item.basePriceQuantity;
-    let unit = item.contentUnit || item.basePriceUnit;
+    let quantityToParse;
+    if (item.tileData.price?.tileInfos) {
+        const tileInfos = item.tileData.price.tileInfos[item.tileData.price?.tileInfos.length - 1].replaceAll(" ", "").split(" ");
+        quantityToParse = tileInfos[0] + " " + tileInfos[1];
+    } else {
+        const regex = /^([0-9.,]+)\s(.*)$/;
+        const titleParts = item.title.replaceAll(" ", "").split(", ");
+        const titleSuffix = titleParts[titleParts.length - 1];
+        if (titleSuffix.match(regex)) {
+            quantityToParse = titleSuffix;
+        }
+    }
+
+    let [quantity, unit] = utils.parseUnitAndQuantityAtEnd(quantityToParse);
     return utils.convertUnit(
         {
             id: "" + item.gtin,
